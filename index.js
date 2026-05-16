@@ -83,4 +83,7 @@ formElement.addEventListener("submit", (event) => {
 	listElement.prepend(newTaskElement);
 
 	inputElement.value = "";
+
+	const updatedTasks = getTasksFromDOM();
+	saveTasks(updatedTasks);
 });
