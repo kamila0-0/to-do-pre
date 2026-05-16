@@ -25,7 +25,7 @@ function createItem(item) {
 	const textElement = clone.querySelector(".to-do__item-text");
   	const deleteButton = clone.querySelector(".to-do__item-button_type_delete");
   	const duplicateButton = clone.querySelector(".to-do__item-button_type_duplicate");
-  	//const editButton = clone.querySelector(".to-do__item-button_type_edit");
+  	const editButton = clone.querySelector(".to-do__item-button_type_edit");
 	textElement.textContent = item;
 
 	deleteButton.addEventListener("click", () => {
@@ -39,6 +39,19 @@ function createItem(item) {
 		listElement.prepend(newItem);
 		const updatedTasks = getTasksFromDOM();
 		saveTasks(updatedTasks);
+	});
+
+	editButton.addEventListener("click", () => {
+		textElement.contentEditable = "true";
+		textElement.focus();
+	});
+
+	textElement.addEventListener("blur", () => {
+		if (textElement.contentEditable === "true") {
+			textElement.contentEditable = "false";
+			const updatedTasks = getTasksFromDOM();
+			saveTasks(updatedTasks);
+		}
 	});
 
 	return clone;
